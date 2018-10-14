@@ -9,9 +9,9 @@ RUN apk --no-cache add python \
     git&& \
     pip install cymysql
 
-RUN git clone -b docker https://github.com/ManSoraTech/legendsocks.git legendsocks
+RUN git clone -b docker https://github.com/ManSoraTech/legendsock.git legendsock
 
-ENTRYPOINT ["/legendsocks/docker_run.sh"]
+ENTRYPOINT ["/legendsock/docker_run.sh"]
  
 CMD ["server.py"]
 
