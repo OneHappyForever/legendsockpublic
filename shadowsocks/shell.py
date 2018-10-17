@@ -111,10 +111,10 @@ def check_config(config, is_local):
     if config.get('server', '') in ['127.0.0.1', 'localhost']:
         logging.warning('warning: server set to listen on %s:%s, are you sure?' %
                      (to_str(config['server']), config['server_port']))
-    if config.get('timeout', 300) < 100:
+    if config.get('timeout', 300) < 600:
         logging.warning('warning: your timeout %d seems too short' %
                      int(config.get('timeout')))
-    if config.get('timeout', 300) > 600:
+    if config.get('timeout', 300) > 1800:
         logging.warning('warning: your timeout %d seems too long' %
                      int(config.get('timeout')))
     if config.get('password') in [b'mypassword']:
