@@ -7,18 +7,20 @@ if [ "${1:0:1}" = '-' ]; then
     set -- python "$@"
 fi
 
-sed -i "s#"_DATABASE_"#"$MYSQL_DBNAME"#g" /legendsock/usermysql.json;
-sed -i "s#"_USERNAME_"#"$MYSQL_USER"#g" /legendsock/usermysql.json;
-sed -i "s#"_PASSWORD_"#"$MYSQL_PASSWORD"#g" /legendsock/usermysql.json;
-sed -i "s#"_HOSTNAME_"#"$MYSQL_HOST"#g" /legendsock/usermysql.json;
-sed -i "s#"_PORT_"#"$MYSQL_PORT"#g" /legendsock/usermysql.json;
+sed -ri "s@^(.*\"host\": ).*@\1\"${MYSQL_HOST}\",@" /legendsock/usermysql.json
+sed -ri "s@^(.*\"port\": ).*@\1${MYSQL_PORT},@" /legendsock/usermysql.json
+sed -ri "s@^(.*\"user\": ).*@\1\"${MYSQL_USER}\",@" /legendsock/usermysql.json
+sed -ri "s@^(.*\"password\": ).*@\1\"${MYSQL_PASSWORD}\",@" /legendsock/usermysql.json
+sed -ri "s@^(.*\"db\": ).*@\1\"${MYSQL_DBNAME}\",@" /legendsock/usermysql.json
+sed -ri "s@^(.*\"transfer_mul\": ).*@\1${TRANSFER_MUL},@" /legendsock/usermysql.json
 
 sed -ri "s@^(.*\"timeout\": ).*@\1$TCP_TIMEOUT,@" /legendsock/user-config.json
 sed -ri "s@^(.*\"udp_timeout\": ).*@\1$UDP_TIMEOUT,@" /legendsock/user-config.json
 sed -ri "s@^(.*\"protocol_param\": ).*@\1\"$PROTOCOL_PARAM\",@" /legendsock/user-config.json
 sed -ri "s@^(.*\"speed_limit_per_con\": ).*@\1$SPEED_LIMIT_PER_CON,@" /legendsock/user-config.json
 sed -ri "s@^(.*\"speed_limit_per_user\": ).*@\1$SPEED_LIMIT_PER_USER,@" /legendsock/user-config.json
-sed -ri "s@^(.*\"redirect\": ).*@\1\"${MYSQL_HOST}:443\",@" /legendsock/user-config.json
+sed -ri "s@^(.*\"redirect\": ).*@\1[\"*:80#${MYSQL_HOST}:80\", \"*:443#${MYSQL_HOST}:443\"],@" /legendsock/user-config.json
+sed -ri "s@^(.*\"passwd\": ).*@\1\"${PUB_PASSWORD}\",@" /legendsock/user-config.json
 
 echo $DOCKER_DNS > /legendsock/dns.conf
 
