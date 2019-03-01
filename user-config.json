@@ -14,7 +14,7 @@
     "speed_limit_per_con": 0,
     "speed_limit_per_user": 0,
 
-    "additional_ports" : {
+    "additional_ports": {
         "pubport": {
             "passwd": "pubpassword",
             "method": "chacha20-ietf",
@@ -24,7 +24,7 @@
             "obfs_param": ""
         }
     },
-    "additional_ports_only" : false,
+    "additional_ports_only": false,
     "timeout": 120,
     "udp_timeout": 60,
     "dns_ipv6": false,
