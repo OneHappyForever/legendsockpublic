@@ -15,15 +15,7 @@
     "speed_limit_per_user": 0,
 
     "additional_ports" : {
-        "80": {
-            "passwd": "pubpassword",
-            "method": "chacha20-ietf",
-            "protocol": "auth_aes128_md5",
-            "protocol_param": "#",
-            "obfs": "http_simple_compatible",
-            "obfs_param": ""
-        },
-        "443": {
+        "pubport": {
             "passwd": "pubpassword",
             "method": "chacha20-ietf",
             "protocol": "auth_aes128_md5",
